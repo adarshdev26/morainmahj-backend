@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 const pool = require('./db');
 
@@ -8,20 +9,11 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-// Root route
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Root route — landing page
 app.get('/', (req, res) => {
-  res.json({ 
-    message: 'Welcome to Morainmahj API',
-    version: '1.0.0',
-    endpoints: [
-      '/api/health',
-      '/api/users',
-      '/api/tournaments',
-      '/api/leagues',
-      '/api/registrations',
-      '/api/stats'
-    ]
-  });
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 // Test database connection
 app.get('/api/health', async (req, res) => {

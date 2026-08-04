@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome — Morain Mahj</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-deep: #0c1220;
+      --bg-mid: #141e33;
+      --accent: #c9a962;
+      --accent-soft: rgba(201, 169, 98, 0.15);
+      --text: #f0ebe3;
+      --text-muted: #9aa8bc;
+      --card: rgba(255, 255, 255, 0.04);
+      --border: rgba(201, 169, 98, 0.2);
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-deep);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem 1.25rem;
+      position: relative;
+    }
+
+    .bg-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201, 169, 98, 0.12), transparent),
+        radial-gradient(ellipse 50% 40% at 90% 80%, rgba(56, 120, 140, 0.15), transparent),
+        radial-gradient(ellipse 40% 35% at 5% 70%, rgba(80, 60, 120, 0.1), transparent);
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.04;
+      background-image:
+        linear-gradient(var(--accent) 1px, transparent 1px),
+        linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 680px;
+      text-align: center;
+      animation: fadeUp 0.9s ease-out both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--accent-soft);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      box-shadow: 0 0 8px #4ade80;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 8vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    h1 span {
+      display: block;
+      background: linear-gradient(135deg, var(--text) 30%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 420px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      margin-bottom: 2rem;
+    }
+
+    .tiles {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .tile {
+      width: 42px;
+      height: 54px;
+      border-radius: 6px;
+      background: linear-gradient(160deg, #f5f0e8 0%, #ddd5c4 100%);
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      animation: tileFloat 3s ease-in-out infinite;
+    }
+
+    .tile:nth-child(2) { animation-delay: 0.4s; }
+    .tile:nth-child(3) { animation-delay: 0.8s; }
+
+    @keyframes tileFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+    }
+
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    a.btn-primary {
+      background: linear-gradient(135deg, var(--accent), #a8873f);
+      color: var(--bg-deep);
+      box-shadow: 0 4px 20px rgba(201, 169, 98, 0.3);
+    }
+
+    a.btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(201, 169, 98, 0.4);
+    }
+
+    a.btn-ghost {
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      background: transparent;
+    }
+
+    a.btn-ghost:hover {
+      color: var(--text);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      margin-top: 2.5rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="grid-overlay"></div>
+
+  <main>
+    <div class="badge">
+      <span class="badge-dot"></span>
+      Server Active
+    </div>
+
+    <h1>
+      Welcome
+      <span>Morain Mahj</span>
+    </h1>
+
+    <p class="subtitle">
+      Your tournament and league management platform is up and running.
+      Connect, compete, and track every game from here.
+    </p>
+
+    <div class="card">
+      <div class="tiles" aria-hidden="true">
+        <div class="tile">🀄</div>
+        <div class="tile">🀅</div>
+        <div class="tile">🀆</div>
+      </div>
+
+      <div class="actions">
+        <a href="/api/health" class="btn btn-primary">Check API Health</a>
+        <a href="/api/stats" class="btn btn-ghost">View Stats</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>Morain Mahj &copy; 2026</footer>
+</body>
+</html>
