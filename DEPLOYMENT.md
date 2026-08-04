@@ -26,8 +26,8 @@ deploys whatever is on `main`, and until the commit that accompanies this file,
 you will ship a backend with no routes, no auth middleware, and no functions.
 
 **2. Only 8 of 108 Base44 server functions are ported.** The frontend calls 59 by
-name and 51 of those have no implementation, so they return 404 from
-`/api/functions/:name`. Deploying now gets you a live site with working login,
+name and 51 of those have no implementation, so they answer 501 from
+`/api/functions/:name` with the list of names that do exist. Deploying now gets you a live site with working login,
 entity CRUD, and public leaderboards; checkout, invites, bulk email/SMS, push
 notifications, league assignment, raffles, and silent auctions will fail until
 those functions are ported. See [Known gaps](#known-gaps) for the full list.
@@ -67,8 +67,13 @@ local$ npm run dev
 ```
 
 Log in through the UI. Confirm the dashboard loads and the browser devtools
-Network tab shows calls to `localhost:3000/api/...` returning 200. This proves
+Network tab shows calls to `localhost:5173/api/...` returning 200. This proves
 the `base44Client.js` shim and your JWT auth work end to end.
+
+Those calls are same-origin because the frontend `.env` leaves `VITE_API_URL`
+empty and the dev server proxies `/api` to port 3000 (`VITE_DEV_API_PROXY`).
+That mirrors the Nginx setup below, so you should see no `OPTIONS` preflight
+requests locally either — if you do, an absolute `VITE_API_URL` is still set.
 
 ---
 
