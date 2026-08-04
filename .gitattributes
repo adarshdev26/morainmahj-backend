@@ -1,2 +1,7 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Deploy scripts run on Linux. A CRLF checkout makes the shebang unparseable and
+# the script fails with "bad interpreter", so pin these regardless of platform.
+*.sh text eol=lf
+
