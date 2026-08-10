@@ -1,4 +1,4 @@
-// Port of base44/functions/getPublicLeagueLeaderboard/entry.ts
+// Port of functions/getPublicLeagueLeaderboard/entry.ts
 //
 // Public (unauthenticated) league leaderboard by website_slug. Returns season
 // standings (with special-hand points), current-session standings, league info,

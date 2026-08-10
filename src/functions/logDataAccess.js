@@ -1,4 +1,4 @@
-// Port of base44/functions/logDataAccess/entry.ts
+// Port of functions/logDataAccess/entry.ts
 //
 // Records an audit entry before sensitive data is returned. Writes through the
 // policy-scoped view, as the original did, so the row is attributed to the caller.

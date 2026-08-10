@@ -1,4 +1,4 @@
-// Port of base44/functions/getTournamentPlayerNames/entry.ts
+// Port of functions/getTournamentPlayerNames/entry.ts
 //
 // Returns the confirmed player directory for a tournament (id + name + email).
 // Uses service role because the Registration policy only exposes the current

@@ -2,7 +2,7 @@
 //   pm2 start ecosystem.config.js --env production
 //   pm2 save
 //
-// cluster mode is deliberately avoided: the ported Base44 functions and the RLS
+// cluster mode is deliberately avoided: the ported legacy platform functions and the RLS
 // actor middleware assume a single shared pg pool, and a few of the scheduled
 // helpers are not safe to run in parallel copies.
 module.exports = {

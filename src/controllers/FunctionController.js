@@ -1,7 +1,7 @@
 const functions = require('../functions');
 const { createContext } = require('../functions/context');
 
-// Mirrors the Base44 SDK's functions.invoke: the client POSTs a JSON payload and
+// Mirrors the previous SDK's functions.invoke: the client POSTs a JSON payload and
 // receives the function's return value as the response body.
 async function invoke(req, res) {
   const { name } = req.params;

@@ -25,7 +25,7 @@ deploys whatever is on `main`, and until the commit that accompanies this file,
 `main` contained only the old single-file `server.js`. Push before you deploy or
 you will ship a backend with no routes, no auth middleware, and no functions.
 
-**2. Only 8 of 108 Base44 server functions are ported.** The frontend calls 59 by
+**2. Only 8 of 108 legacy platform server functions are ported.** The frontend calls 59 by
 name and 51 of those have no implementation, so they answer 501 from
 `/api/functions/:name` with the list of names that do exist. Deploying now gets you a live site with working login,
 entity CRUD, and public leaderboards; checkout, invites, bulk email/SMS, push
@@ -68,7 +68,7 @@ local$ npm run dev
 
 Log in through the UI. Confirm the dashboard loads and the browser devtools
 Network tab shows calls to `localhost:5173/api/...` returning 200. This proves
-the `base44Client.js` shim and your JWT auth work end to end.
+the `API client` shim and your JWT auth work end to end.
 
 Those calls are same-origin because the frontend `.env` leaves `VITE_API_URL`
 empty and the dev server proxies `/api` to port 3000 (`VITE_DEV_API_PROXY`).
@@ -442,12 +442,12 @@ Missing, grouped by the feature that breaks:
 | Public pages | `getPublicTournamentWebsite`, `getPublicLeagueWebsite`, `getPublicCourseWebsite` |
 | Onboarding | `invitePlayer`, `selfRegister`, `generateShareToken` |
 
-The originals are at `morain-mahj/base44/functions/<name>/entry.ts`. To port one,
+The originals are at `backend function modules`. To port one,
 add `src/functions/<name>.js` exporting `async (ctx, body) => result` and
 register it in `src/functions/index.js`; set `fn.public = true` only for
-endpoints Base44 also served unauthenticated.
+endpoints legacy platform also served unauthenticated.
 
-**Three platform features are stubbed** in `morain-mahj/src/api/base44Client.js`
+**Three platform features are stubbed** in `morain-mahj/src/api/API client`
 and reject with `NotPortedError`: file uploads (needs S3 plus presigned URLs),
 outbound email (needs SES or similar), and realtime `subscribe()` (currently a
 no-op, so screens load data but never live-update). Self-service registration,

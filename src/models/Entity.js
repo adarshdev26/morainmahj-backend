@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const pool = require('../../db');
 const Rls = require('./Rls');
 
-// Matches the Base44 SDK's own defaults so pages paginate exactly as they did
+// Matches the previous SDK's own defaults so pages paginate exactly as they did
 // against the hosted API.
 const DEFAULT_LIMIT = 50;
 const MAX_LIMIT = 5000;
@@ -83,7 +83,7 @@ function sanitize(entity, row) {
   return safe;
 }
 
-// Matches the 24-character hex ids used throughout the Base44 export.
+// Matches the 24-character hex ids used throughout the legacy platform export.
 function generateId() {
   return crypto.randomBytes(12).toString('hex');
 }
@@ -94,7 +94,7 @@ function clampLimit(limit, max = MAX_LIMIT) {
   return Math.min(parsed, max);
 }
 
-// Base44 sort syntax: "field" or "+field" ascending, "-field" descending.
+// legacy platform sort syntax: "field" or "+field" ascending, "-field" descending.
 function buildOrderBy(sort, columns, entity) {
   const requested = sort || DEFAULT_SORT;
   const descending = requested.startsWith('-');
@@ -196,7 +196,7 @@ function writableFields(entity, payload, columns) {
   );
 }
 
-// Base44 stamped the creating user onto every row, and several policies read
+// legacy platform stamped the creating user onto every row, and several policies read
 // those columns back (`created_by: {{user.email}}`), so they are filled here
 // when a caller is known and did not supply them.
 function withCreatorStamp(payload, columns, actor) {
@@ -309,9 +309,9 @@ async function authorizeWrite(entity, action, { id, payload, context }) {
 
 /**
  * Entity access restricted to what `context.actor` is permitted to see and
- * change — the equivalent of `base44.entities`. The bare functions exported
+ * change — the equivalent of `scoped entities`. The bare functions exported
  * alongside this are the service-role path, equivalent to
- * `base44.asServiceRole.entities`.
+ * `serviceRole.entities`.
  */
 function scoped(context) {
   if (!context || !context.actor) {

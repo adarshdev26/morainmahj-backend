@@ -1,4 +1,4 @@
-// Port of base44/functions/getPlayerRepository/entry.ts
+// Port of functions/getPlayerRepository/entry.ts
 //
 // Builds the admin player directory: every player enriched with the tournaments,
 // leagues and courses they have taken part in. An organizer_admin is confined to

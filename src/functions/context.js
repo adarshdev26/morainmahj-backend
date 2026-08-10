@@ -1,8 +1,8 @@
-// Builds the object the ported Base44 functions receive.
+// Builds the object the ported legacy platform functions receive.
 //
-// The exported functions were written against the Base44 SDK, using
-// `base44.auth.me()`, `base44.entities.X` (policy-scoped) and
-// `base44.asServiceRole.entities.X` (unrestricted). Reproducing that shape here
+// The exported functions were written against the previous SDK, using
+// `auth.me()`, `scoped entities.X` (policy-scoped) and
+// `serviceRole.entities.X` (unrestricted). Reproducing that shape here
 // means each port keeps the original's structure, including its permission
 // checks, instead of being rewritten from scratch.
 const Entity = require('../models/Entity');
@@ -63,7 +63,7 @@ function createContext(req) {
   const context = actor ? { actor, query: req.query } : null;
 
   return {
-    // Base44 resolved the caller's full record here, including custom fields
+    // legacy platform resolved the caller's full record here, including custom fields
     // that the exports address as `user.data.*`. The flattened columns are
     // exposed both directly and under `data` so either style keeps working.
     // Returns null for an anonymous caller, which the ports check for.

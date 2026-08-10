@@ -1,6 +1,6 @@
 const Entity = require('../models/Entity');
 
-// Responses mirror the Base44 SDK: collections are bare arrays and records are
+// Responses mirror the previous SDK: collections are bare arrays and records are
 // bare objects, so the frontend needs no reshaping. Every request is scoped to
 // the caller's row-level security policy.
 function handle(handler) {

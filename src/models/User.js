@@ -5,7 +5,7 @@ const TABLE = '"User"';
 const DEFAULT_LIMIT = 50;
 
 // Never leaves the server. SELECT * is used so the API keeps returning every
-// column the Base44 export carries, so anything secret has to be stripped here.
+// column the legacy platform export carries, so anything secret has to be stripped here.
 const SENSITIVE_FIELDS = ['password'];
 
 // Columns a client is allowed to write through update(). Anything else in the

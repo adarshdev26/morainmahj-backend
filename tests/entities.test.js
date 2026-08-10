@@ -153,7 +153,7 @@ test('an array value becomes an ANY lookup so id lists work', async () => {
   assert.deepEqual(queries[0].params[0], ['a', 'b']);
 });
 
-test('defaults match the Base44 SDK: 50 rows, newest first', async () => {
+test('defaults match the legacy platform SDK: 50 rows, newest first', async () => {
   await get('/api/entities/Tournament');
   assert.match(queries[0].sql, /ORDER BY "created_date" DESC/);
   assert.equal(queries[0].params.at(-1), 50);

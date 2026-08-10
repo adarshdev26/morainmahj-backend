@@ -1,4 +1,4 @@
-// Port of base44/functions/getRaffleAllocations/entry.ts
+// Port of functions/getRaffleAllocations/entry.ts
 //
 // Admin-only: allocation data reveals who holds which tickets.
 const { httpError } = require('./errors');

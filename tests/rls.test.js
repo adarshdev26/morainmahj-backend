@@ -1,5 +1,5 @@
 // Verifies the row-level security engine against the policies exported from
-// Base44, from the perspective of each role the app uses.
+// legacy platform, from the perspective of each role the app uses.
 const assert = require('node:assert/strict');
 const { test } = require('node:test');
 

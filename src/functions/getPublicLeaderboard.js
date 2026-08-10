@@ -1,4 +1,4 @@
-// Port of base44/functions/getPublicLeaderboard/entry.ts
+// Port of functions/getPublicLeaderboard/entry.ts
 //
 // Returns tournament info, scorecards, and a player_id -> name map for public
 // (unauthenticated) leaderboard display on big screens.

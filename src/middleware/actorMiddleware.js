@@ -26,4 +26,10 @@ async function loadActor(req, res, next) {
   }
 }
 
-module.exports = { loadActor };
+/** Skip when there is no JWT user (public-read routes). */
+function loadActorOptional(req, res, next) {
+  if (!req.user) return next();
+  return loadActor(req, res, next);
+}
+
+module.exports = { loadActor, loadActorOptional };

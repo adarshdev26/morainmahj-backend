@@ -1,12 +1,12 @@
-// Copies the row-level security rules out of the Base44 entity exports into
+// Copies the row-level security rules out of the legacy platform entity exports into
 // src/config/rls.json, so the backend enforces them without depending on the
 // frontend checkout at runtime.
 //
-// Usage: npm run import-rls [path-to-base44/entities]
+// Usage: npm run import-rls [path-to-entity-exports]
 const fs = require('node:fs');
 const path = require('node:path');
 
-const DEFAULT_SOURCE = path.resolve(__dirname, '../../morain-mahj/base44/entities');
+const DEFAULT_SOURCE = path.resolve(__dirname, '../../entity export folder');
 const TARGET = path.resolve(__dirname, '../src/config/rls.json');
 
 // The exports are JSONC, so comments have to go before JSON.parse.

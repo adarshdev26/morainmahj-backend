@@ -1,4 +1,4 @@
-// Enforces the row-level security policies exported from Base44.
+// Enforces the row-level security policies exported from legacy platform.
 //
 // A policy is a small recursive expression built from four things:
 //   {}                                  -> unrestricted (public)
@@ -14,11 +14,11 @@ const POLICIES = require('../config/rls.json');
 
 const ACTIONS = new Set(['create', 'read', 'update', 'delete']);
 
-// Base44 nested an entity's own fields under `data`; the export flattened them
+// legacy platform nested an entity's own fields under `data`; the export flattened them
 // into real columns, so that prefix is dropped when resolving a field.
 const DATA_PREFIX = /^data\./;
 
-// The User entity carries no policy in the export — Base44 governed it
+// The User entity carries no policy in the export — legacy platform governed it
 // internally. Reads stay open to any authenticated caller, which matches the
 // previous behaviour, while writes are handled by Entity's protected-field list
 // and the dedicated /api/auth/me route.

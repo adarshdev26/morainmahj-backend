@@ -6,11 +6,11 @@ const compression = require('compression');
 const path = require('path');
 require('dotenv').config();
 const pool = require('./db');
-const { authenticateToken } = require('./src/middleware/authMiddleware');
 const authRoutes = require('./src/routes/authRoutes');
-const userRoutes = require('./src/routes/userRoutes');
-const entityRoutes = require('./src/routes/entityRoutes');
-const functionRoutes = require('./src/routes/functionRoutes');
+const integrationRoutes = require('./src/routes/integrationRoutes');
+const userInviteRoutes = require('./src/routes/userInviteRoutes');
+const { mountNamedResources } = require('./src/routes/mountNamedResources');
+const { mountNamedActions } = require('./src/routes/mountNamedActions');
 
 const app = express();
 
@@ -40,9 +40,11 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/entities', entityRoutes);
-app.use('/api/functions', functionRoutes);
+app.use('/api/integrations', integrationRoutes);
+app.use('/api/users', userInviteRoutes);
+// Named REST only: /api/{resource} and /api/actions/{kebab-name}.
+mountNamedResources(app);
+mountNamedActions(app);
 
 // Alias so clients that were written against /api/login keep working.
 app.post('/api/login', (req, res, next) => {
@@ -67,49 +69,7 @@ app.get('/api/health', async (req, res) => {
   }
 });
 
-// Get all tournaments
-app.get('/api/tournaments', authenticateToken, async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM "Tournament" LIMIT 50');
-    res.json({
-      success: true,
-      count: result.rows.length,
-      data: result.rows
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// Get all leagues
-app.get('/api/leagues', authenticateToken, async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM "League" LIMIT 50');
-    res.json({
-      success: true,
-      count: result.rows.length,
-      data: result.rows
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// Get all registrations
-app.get('/api/registrations', authenticateToken, async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM "Registration" LIMIT 50');
-    res.json({
-      success: true,
-      count: result.rows.length,
-      data: result.rows
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// Get database stats
+// Get database stats (aggregate counts only — no row data)
 app.get('/api/stats', async (req, res) => {
   try {
     const users = await pool.query('SELECT COUNT(*) FROM "User"');

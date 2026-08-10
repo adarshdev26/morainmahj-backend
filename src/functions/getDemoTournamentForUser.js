@@ -1,4 +1,4 @@
-// Port of base44/functions/getDemoTournamentForUser/entry.ts
+// Port of functions/getDemoTournamentForUser/entry.ts
 //
 // Offers a demo tournament to players who have nothing real yet. Returns
 // { tournament: null } once the player has any demo registration or at least one

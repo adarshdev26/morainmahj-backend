@@ -7,7 +7,7 @@ const { loadActor } = require('../middleware/actorMiddleware');
 const router = express.Router();
 
 // A handful of functions back public pages (big-screen leaderboards, published
-// league websites) and were served unauthenticated by Base44 too. Everything
+// league websites) and were served unauthenticated by legacy platform too. Everything
 // else requires a token before it runs.
 function requireFunctionAuth(req, res, next) {
   const fn = functions.get(req.params.name);

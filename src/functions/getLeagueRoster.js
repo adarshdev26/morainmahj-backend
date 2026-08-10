@@ -1,4 +1,4 @@
-// Port of base44/functions/getLeagueRoster/entry.ts
+// Port of functions/getLeagueRoster/entry.ts
 //
 // Returns the public roster (names + regular status only — no email/phone) for a
 // league, gated so only admins, the league's organizer, or an existing active
